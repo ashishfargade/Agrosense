@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logos/logo-green.png";
 
@@ -10,6 +10,7 @@ const Navbar = ({logged}) => {
   const handleNav = () => {
     logged ? navigate("/dashboard") : navigate("/login") ;
   };
+
 
   return (
     <div className="w-full h-[90px] bg-green-950">

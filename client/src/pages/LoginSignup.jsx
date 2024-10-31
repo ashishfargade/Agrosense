@@ -1,9 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Signup } from "../components/Signup";
 import { Login } from "../components/Login";
+import { useNavigate } from "react-router-dom";
 
 export const LoginSignup = () => {
+
+  const navigate = useNavigate();
+
   const [newUser, setNewUser] = useState(false);
+
+  const token = localStorage.getItem('x-auth-token');
+
+  useEffect( ()=> {
+    if(token){
+      navigate("/dashboard");
+    }
+  }, [])
+  
+
+  const handleSignup = () => {
+    setNewUser(true);
+  }
+
+  const handleLogin = () => {
+    setNewUser(false);
+  }
 
   return (
     <div className="w-full h-full absolute bg-gray-200">
@@ -17,7 +38,7 @@ export const LoginSignup = () => {
         </div>
   
         {
-          newUser ? <Signup/> : <Login setNewUser={setNewUser}/>
+          newUser ? <Signup handleLogin={handleLogin}/> : <Login handleSignup={handleSignup}/>
         }
 
       </div>

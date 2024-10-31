@@ -72,11 +72,15 @@ router.post(
 
         } catch (err) {
             console.log(err.message);
-            res.send(500).send("server Error");
+            res.status(500).send("server Error");
         }
 
         console.log(req.body);
     }
 );
+
+
+// logout
+
 
 export default router;

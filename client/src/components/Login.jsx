@@ -1,26 +1,31 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { AiOutlineRollback } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-export const Login = ({ setNewUser }) => {
+import { login } from "../features/auth/authSlice.js";
+
+export const Login = ({ handleSignup }) => {
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const onChangeE = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const onChangeP = (e) => {
-    setPassword(e.target.value);
-  }
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email);
     console.log(password);
 
+    try {
+
+      dispatch(login({email, password}));
+      navigate('/dashboard');
+
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -40,7 +45,7 @@ export const Login = ({ setNewUser }) => {
           <div className="w-1/3">
             <label
               className="block text-gray-500 font-bold text-center mb-1 md:mb-0 pr-4"
-              for="inline-email"
+              htmlFor="inline-email"
             >
               Email
             </label>
@@ -51,7 +56,7 @@ export const Login = ({ setNewUser }) => {
               id="inline-email"
               type="email"
               value={email}
-              onChange={onChangeE}
+              onChange={(e) => { setEmail(e.target.value) }}
               placeholder="abc@gmail.com"
               required
             />
@@ -61,7 +66,7 @@ export const Login = ({ setNewUser }) => {
           <div className="md:w-1/3">
             <label
               className="block text-gray-500 font-bold md:text-center mb-1 md:mb-0 pr-4"
-              for="inline-password"
+              htmlFor="inline-password"
             >
               Password
             </label>
@@ -72,7 +77,7 @@ export const Login = ({ setNewUser }) => {
               id="inline-password"
               type="password"
               value={password}
-              onChange={onChangeP}
+              onChange={(e) => { setPassword(e.target.value) }}
               placeholder="******************"
               required
             />
@@ -89,7 +94,7 @@ export const Login = ({ setNewUser }) => {
         </div>
         <div className="flex flex-row justify-center h-min">
           <p
-            onClick={() => setNewUser(true)}
+            onClick={ () => handleSignup() }
             className="italic text-green-800 mt-3 cursor-pointer"
           >
             New User? Click here to Signup

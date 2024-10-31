@@ -2,10 +2,10 @@ import Footer from "../components/Footer"
 import { Hero } from "../components/Hero"
 import Navbar from "../components/Navbar"
 
-export const Home = ({logged}) => {
+export const Home = () => {
   return (
     <div>
-        <Navbar logged={logged}/>
+        <Navbar/>
         <Hero/>
         <Footer/>
     </div>
