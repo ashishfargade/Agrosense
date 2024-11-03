@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineRollback } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { login } from "../features/auth/authSlice.js";
+import { login, selectUser } from "../features/auth/authSlice.js";
 
 export const Login = ({ handleSignup }) => {
 
@@ -13,6 +13,8 @@ export const Login = ({ handleSignup }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const user = useSelector(selectUser);
+
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email);
@@ -21,12 +23,17 @@ export const Login = ({ handleSignup }) => {
     try {
 
       dispatch(login({email, password}));
-      navigate('/dashboard');
 
     } catch (err) {
       console.log(err);
     }
   }
+
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
   return (
     <div className="flex flex-col w-1/2 h-full">

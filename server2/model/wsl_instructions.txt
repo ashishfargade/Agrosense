@@ -1,0 +1,12 @@
+1. wsl.exe
+2. sudo pip install jupyter_http_over_ws
+3. sudo jupyter-server extension enable --py jupyter_http_over_ws
+4. jupyter notebook --NotebookApp.allow_origin='https://colab.research.google.com' --port=8888 --NotebookApp.port_retries=0
+4. jupyter notebook --port=8888 --NotebookApp.port_retries=0
+
+
+ONLY: jupyter-server
+
+JUPYTER EXTENSION:
+Open the Command Palette (Ctrl + Shift + P), search for "Jupyter: Specify local or remote Jupyter server for connections" and select it.
+When prompted, enter the URL where your Jupyter Notebook is running (usually http://localhost:8888).

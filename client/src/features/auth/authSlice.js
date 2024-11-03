@@ -23,7 +23,7 @@ export const signup = createAsyncThunk("user/signup", async (user) => {
     if (response1.status !== 200) {
         throw new Error("Signup failed: " + response1.statusText);
     }
-    localStorage.setItem("x-auth-token", response1.data.token);
+    // localStorage.setItem("x-auth-token", response1.data.token);
 
     console.log("Request Success");
 
@@ -56,7 +56,7 @@ export const login = createAsyncThunk("user/login", async (useremailandpass) => 
     
         const token = response1.data.token;
     
-        localStorage.setItem("x-auth-token", token);
+        // localStorage.setItem("x-auth-token", token);
     
         const response2 = await axios.get("/user/auth", {
             headers: { "x-auth-token": token },
@@ -88,7 +88,7 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.error = null;
 
-                localStorage.removeItem("x-auth-token");
+                localStorage.removeItem("token");
             },
         },
     },
@@ -102,6 +102,10 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.token = action.payload.token;
                 state.user = action.payload.user;
+
+                localStorage.setItem('user-name', action.payload.user.name);
+                localStorage.setItem('user-email', action.payload.user.email);
+                localStorage.setItem('token', action.payload.token);
             })
             .addCase(signup.rejected, (state, action) => {
                 state.loading = false;
@@ -115,6 +119,10 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.token = action.payload.token;
                 state.user = action.payload.user;
+
+                localStorage.setItem('user-name', action.payload.user.name);
+                localStorage.setItem('user-email', action.payload.user.email);
+                localStorage.setItem('token', action.payload.token);
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;

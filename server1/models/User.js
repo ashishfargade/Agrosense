@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import FarmSchema from "./Farm";
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -20,7 +21,8 @@ const UserSchema = mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    farms: [FarmSchema]
 })
 
 const User = mongoose.model('UserSchema', UserSchema);

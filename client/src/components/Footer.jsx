@@ -4,7 +4,7 @@ const Footer = () => {
       <footer className="bg-green-900 py-4 bottom-0">
         <div className="container mx-auto text-white text-center">
           <p className="text-sm">
-            Crop Recommendation &copy; {new Date().getFullYear()}
+            Eco-Invest &copy; {new Date().getFullYear()}
           </p>
         </div>
       </footer>
