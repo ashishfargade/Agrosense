@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import FarmSchema from "./Farm";
+import FarmSchema from "./Farm.js";
 
 const UserSchema = new mongoose.Schema({
     name: {

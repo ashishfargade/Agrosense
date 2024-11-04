@@ -12,70 +12,82 @@ export const signup = createAsyncThunk("user/signup", async (user) => {
     const { name, email, password } = user;
 
     console.log(user);
-    
-    const response1 = await axios.post(
-        "/user/new",
-        JSON.stringify({ name, email, password }),
-        {
-            headers: { "Content-Type": "application/json" },
-        }
-    );
-    if (response1.status !== 200) {
-        throw new Error("Signup failed: " + response1.statusText);
-    }
-    // localStorage.setItem("x-auth-token", response1.data.token);
-
-    console.log("Request Success");
-
-    const { password: _, ...userwopass } = user;
-
-    return {
-        token: response1.data.token,
-        user: userwopass,
-    };
-});
-
-export const login = createAsyncThunk("user/login", async (useremailandpass) => {
-
-    const {email, password} = useremailandpass;
-
-    console.log(email, password);
 
     try {
         const response1 = await axios.post(
-            "/user/auth",
-            JSON.stringify( {email, password} ),
+            "/user/new",
+            JSON.stringify({ name, email, password }),
             {
                 headers: { "Content-Type": "application/json" },
             }
         );
-    
         if (response1.status !== 200) {
-            throw new Error("Login failed: " + response1.statusText);
+            throw new Error("Signup failed: " + response1.statusText);
         }
-    
+        console.log("Signup Success");
         const token = response1.data.token;
-    
-        // localStorage.setItem("x-auth-token", token);
-    
+
         const response2 = await axios.get("/user/auth", {
             headers: { "x-auth-token": token },
         });
-    
         if (response2.status !== 200) {
             throw new Error("Authentication failed: " + response2.statusText);
         }
-    
-        const user = { email: response2.data.email, name: response2.data.name };
-    
+
+        console.log(response2.data)
+
         return {
-            token,
-            user,
+            token: response1.data.token,
+            user: response2.data,
         };
     } catch (err) {
-        console.log(err.message);
+        console.log(err);
     }
 });
+
+export const login = createAsyncThunk(
+    "user/login",
+    async (useremailandpass) => {
+        const { email, password } = useremailandpass;
+
+        console.log(email, password);
+
+        try {
+            const response1 = await axios.post(
+                "/user/auth",
+                JSON.stringify({ email, password }),
+                {
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
+
+            if (response1.status !== 200) {
+                throw new Error("Login failed: " + response1.statusText);
+            }
+
+            const token = response1.data.token;
+
+            const response2 = await axios.get("/user/auth", {
+                headers: { "x-auth-token": token },
+            });
+
+            if (response2.status !== 200) {
+                throw new Error(
+                    "Authentication failed: " + response2.statusText
+                );
+            }
+
+            const user = response2.data; 
+
+            return {
+                token,
+                user,
+            };
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+);
 
 const authSlice = createSlice({
     name: "auth",
@@ -103,9 +115,8 @@ const authSlice = createSlice({
                 state.token = action.payload.token;
                 state.user = action.payload.user;
 
-                localStorage.setItem('user-name', action.payload.user.name);
-                localStorage.setItem('user-email', action.payload.user.email);
-                localStorage.setItem('token', action.payload.token);
+                sessionStorage.setItem("user", JSON.stringify(action.payload.user));
+                sessionStorage.setItem("token", action.payload.token);
             })
             .addCase(signup.rejected, (state, action) => {
                 state.loading = false;
@@ -120,9 +131,8 @@ const authSlice = createSlice({
                 state.token = action.payload.token;
                 state.user = action.payload.user;
 
-                localStorage.setItem('user-name', action.payload.user.name);
-                localStorage.setItem('user-email', action.payload.user.email);
-                localStorage.setItem('token', action.payload.token);
+                sessionStorage.setItem("user", JSON.stringify(action.payload.user));
+                sessionStorage.setItem("token", action.payload.token);
             })
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;

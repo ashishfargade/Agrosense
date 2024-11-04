@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { LoginSignup } from "./pages/LoginSignup";
 import { Dashboard } from "./pages/Dashboard";
 import ProtectedRoute from "./app/utils/ProtectedRoute";
+import { PredictForm } from "./pages/PredictForm.jsx";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
                     {/* Protected Routes */}
                     <Route element={<ProtectedRoute />}>
                         <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/fertpredict" element={<PredictForm/>}/>
                     </Route>
                     <Route path="*" element={<Home />} />
                 </Routes>

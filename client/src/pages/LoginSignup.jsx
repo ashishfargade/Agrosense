@@ -5,18 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const LoginSignup = () => {
 
-  const navigate = useNavigate();
-
   const [newUser, setNewUser] = useState(false);
-
-  const token = localStorage.getItem('x-auth-token');
-
-  useEffect( ()=> {
-    if(token){
-      navigate("/dashboard");
-    }
-  }, [])
-  
 
   const handleSignup = () => {
     setNewUser(true);

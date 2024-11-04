@@ -80,7 +80,7 @@ router.post(
 );
 
 
-// logout
+// logout controller if needed (incase of cookies)
 
 
 export default router;

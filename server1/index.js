@@ -7,6 +7,7 @@ import { connectDB } from "./db.js";
 import user from "./routes/user.js";
 import auth from "./routes/auth.js";
 import goauth from "./routes/goauth.js";
+import farm from "./routes/farm.js";
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({
     origin: 'http://localhost:5173', // Replace with frontend URL
-    methods: 'GET, POST, PUT',
+    methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type, x-auth-token',
     credentials : true
 }))
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 app.use('/user/new', user);
 app.use('/user/auth', auth);
 app.use('/user/goauth', goauth);
+app.use('/farm', farm);
 
 app.listen(port, () => {
     console.log(`Server started on PORT: ${port}`);

@@ -3,8 +3,10 @@ from flask import Flask, request, jsonify
 import numpy as np
 from flask_cors import CORS
 
+# http://127.0.0.1:5000
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173, http://localhost:3000"])
+# CORS(app, origins=["http://localhost:5173, http://localhost:3000"])
+CORS(app)
 
 crop_to_int = {
     'Barley': 0,

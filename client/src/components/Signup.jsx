@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineRollback } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -34,9 +34,8 @@ export const Signup = ({ handleLogin }) => {
         if (requestStatus === "idle") {
             try {
                 setRequestStatus("pending");
-                dispatch(signup(user)).unwrap();
-                navigate('/dashboard');
-
+                await dispatch(signup(user)).unwrap();
+                navigate("/dashboard")
             } catch (err) {
                 console.log(err);
             } finally {
@@ -44,6 +43,14 @@ export const Signup = ({ handleLogin }) => {
             }
         }
     };
+
+    const token = sessionStorage.getItem('token');
+
+    useEffect(() => {
+        if (token) {
+            navigate("/dashboard");
+        }
+    }, []);
 
     return (
         <div className="flex flex-col w-1/2 h-full px-5">

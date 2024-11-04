@@ -3,7 +3,7 @@ import { AiOutlineRollback } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { login, selectUser } from "../features/auth/authSlice.js";
+import { login, selectToken } from "../features/auth/authSlice.js";
 
 export const Login = ({ handleSignup }) => {
 
@@ -13,27 +13,25 @@ export const Login = ({ handleSignup }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const user = useSelector(selectUser);
+  const token = useSelector(selectToken);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     console.log(email);
     console.log(password);
 
     try {
-
       dispatch(login({email, password}));
-
     } catch (err) {
       console.log(err);
     }
   }
 
   useEffect(() => {
-    if (user) {
+    if (token) {
       navigate("/dashboard");
     }
-  }, [user, navigate]);
+  }, [token]);
 
   return (
     <div className="flex flex-col w-1/2 h-full">
