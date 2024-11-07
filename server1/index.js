@@ -8,6 +8,7 @@ import user from "./routes/user.js";
 import auth from "./routes/auth.js";
 import goauth from "./routes/goauth.js";
 import farm from "./routes/farm.js";
+import weather from "./routes/weather.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/user/new', user);
 app.use('/user/auth', auth);
 app.use('/user/goauth', goauth);
 app.use('/farm', farm);
+app.use('/weather', weather);
 
 app.listen(port, () => {
     console.log(`Server started on PORT: ${port}`);

@@ -40,6 +40,7 @@ router.put(
             check("area", "area is required and should be a number").isNumeric().not().isEmpty(),
             check("soilType", "soil type is required").not().isEmpty(),
             check("location", "location required").not().isEmpty(),
+            check("pincode", "pincode required").not().isEmpty(),
         ],
     ],
     async (req, res) => {
@@ -51,7 +52,7 @@ router.put(
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { farmName, area, soilType, location, currentCrop } = req.body;
+        const { farmName, area, soilType, location, pincode, currentCrop } = req.body;
 
         try {
             const userId = req.user.id;
@@ -61,6 +62,7 @@ router.put(
                 area,
                 soilType,
                 location,
+                pincode,
                 currentCrop,
             };
 

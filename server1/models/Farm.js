@@ -17,6 +17,10 @@ const FarmSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    pincode: {
+        type: String,
+        required: true
+    },
     currentCrop: {
         type: String,
     },

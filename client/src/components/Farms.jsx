@@ -25,6 +25,7 @@ export const Farms = () => {
         area: "",
         soilType: "",
         location: "",
+        pincode: "",
         currentCrop: "",
     });
 
@@ -108,7 +109,7 @@ export const Farms = () => {
                     Farm Data
                 </Typography>
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     onClick={handleOpen}
                 >
@@ -154,6 +155,13 @@ export const Farms = () => {
                         margin="dense"
                         name="location"
                         label="Location"
+                        fullWidth
+                        onChange={handleInputChange}
+                    />
+                    <TextField
+                        margin="dense"
+                        name="pincode"
+                        label="Pincode"
                         fullWidth
                         onChange={handleInputChange}
                     />
