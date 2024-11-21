@@ -17,6 +17,11 @@ export const Dashboard = () => {
         navigate("/fertpredict");
     };
 
+    const handleDiseaseClick = () => {
+        console.log("Go to disease rec");
+        navigate("/diseasepredict");
+    }
+
     const userLogout = () => {
       console.log(logout);
       sessionStorage.removeItem('token');
@@ -43,6 +48,17 @@ export const Dashboard = () => {
                     >
                         Dashboard
                     </Typography>
+
+                    <div className="mx-4" >
+                        <Button 
+                            variant="outlined"
+                            color="white"
+                            onClick={handleDiseaseClick}
+                        >
+                            <Typography variant="subtitle1">Get Disease Recommendation</Typography>
+                        </Button>
+                    </div>
+                    
 
                     <Button
                         variant="outlined"
