@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import { port } from "./config.js";
+import { frontend_url, port } from "./config.js";
 import { connectDB } from "./db.js";
 
 import user from "./routes/user.js";
@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({
-    origin: 'http://localhost:5173', // Replace with frontend URL
+    origin: frontend_url,
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type, x-auth-token',
     credentials : true

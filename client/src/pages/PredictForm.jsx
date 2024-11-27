@@ -35,7 +35,7 @@ export const PredictForm = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post("http://localhost:5000/predict/xgb", {
+            const response = await axios.post(import.meta.env.VITE_SERVER2_URL, {
                 input_data: [
                     parseFloat(formData.temperature),
                     parseFloat(formData.humidity),

@@ -55,7 +55,7 @@ export const Dashboard = () => {
                             color="white"
                             onClick={handleDiseaseClick}
                         >
-                            <Typography variant="subtitle1">Get Disease Recommendation</Typography>
+                            <Typography variant="subtitle1">Get Disease Prediction</Typography>
                         </Button>
                     </div>
                     
