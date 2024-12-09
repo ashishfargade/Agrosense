@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors({
-    origin: frontend_url,
+    origin: {frontend_url},
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type, x-auth-token',
     credentials : true
