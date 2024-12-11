@@ -4,7 +4,7 @@ export const Hero = () => {
             <div className="w-full h-[80vh] top-[90px] bg-black">
                 <img
                     className="absolute top=[10%] w-full h-[80%] object-cover opacity-60"
-                    src=".\src\assets\images\image-6.jpg"
+                    src="\images\image-6.jpg"
                     autoPlay
                     loop
                     muted

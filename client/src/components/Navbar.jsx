@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logos/logo-green.png";
+import logo from "/logos/logo-green.png";
 
 const Navbar = ({logged}) => {
 

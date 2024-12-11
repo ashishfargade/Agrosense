@@ -21,7 +21,7 @@ export const LoginSignup = () => {
         {/* Image on the left */}
         <div className="w-1/2 h-full bg-gradient-to-t from-white via-green-300 to-green-600 rounded-l-lg hidden md:block">
           <img
-            src="./../src/assets/images/image-4.jpg"
+            src="/images/image-4.jpg"
             className="shadow-lg h-full w-full opacity-50 border-r-2 border-green-950 rounded-l-lg"
           />
         </div>
